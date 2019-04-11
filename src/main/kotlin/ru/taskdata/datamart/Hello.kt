@@ -37,7 +37,7 @@ fun main() {
     val sc = JavaSparkContext(conf)
 
     val session = SparkSession(sc.sc())
-    //  session.udf().register("latestCost", latestCost, DataTypes.LongType)
+    session.udf().register("latestCost", latestCost, DataTypes.LongType)
     val records = JavaEsSparkSQL.esDF(session, "index")
     records.createOrReplaceTempView("records")
     records.sqlContext().sql("select count(*) from records")
